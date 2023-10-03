@@ -1,8 +1,5 @@
 package com.autthServer.authServer;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.Authentication;
@@ -74,6 +71,8 @@ public class JwtTokenProvider {
             logger.error("JWT Token expired:{}",e.getMessage());
         }catch (IllegalArgumentException e){
             logger.error("JWT claims string is empty:{}",e.getMessage());
+        }catch (UnsupportedJwtException e){
+
         }
         return false;
     }
