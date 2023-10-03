@@ -1,4 +1,5 @@
 package com.autthServer.authServer;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -42,5 +43,17 @@ public class JwtTokenProvider {
         return Keys.hmacShaKeyFor(
                 Decoders.BASE64.decode(jwtSecret)
         );
+    }
+
+//    get username from jwt token
+    public String getUsername(String token) {
+        Claims claims=Jwts.parserBuilder()
+                .setSigningKey(key())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+        String username;
+        username = claims.getSubject();
+        return username;
     }
 }
