@@ -72,7 +72,7 @@ public class JwtTokenProvider {
         }catch (IllegalArgumentException e){
             logger.error("JWT claims string is empty:{}",e.getMessage());
         }catch (UnsupportedJwtException e){
-
+            logger.error();
         }
         return false;
     }
