@@ -76,4 +76,10 @@ public class JwtTokenProvider {
         }
         return false;
     }
+
+    public String generateToken(Authentication authentication){
+        String username=authentication.getName();
+
+        Date currentDate=new Date();
+    }
 }
