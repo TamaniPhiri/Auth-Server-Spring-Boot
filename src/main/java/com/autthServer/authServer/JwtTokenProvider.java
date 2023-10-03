@@ -1,6 +1,8 @@
 package com.autthServer.authServer;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.Authentication;
@@ -56,5 +58,20 @@ public class JwtTokenProvider {
         String username;
         username = claims.getSubject();
         return username;
+    }
+
+//    validate jwt token
+    public boolean validateToken(String token){
+        try {
+            Jwts.parserBuilder()
+                    .setSigningKey(key())
+                    .build()
+                    .parse(token);
+            return true;
+        }catch (MalformedJwtException e){
+            logger.error("Invalid JWT Token: {}",e.getMessage());
+        }catch (ExpiredJwtException e){
+            logger.error("JWT Token expired");
+        }
     }
 }
