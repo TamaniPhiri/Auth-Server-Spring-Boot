@@ -72,6 +72,7 @@ public class JwtTokenProvider {
             logger.error("Invalid JWT Token: {}",e.getMessage());
         }catch (ExpiredJwtException e){
             logger.error("JWT Token expired");
+
         }
     }
 }
